@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Monthly Report</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>📄 Monthly Report</h1>
+
+<label>Select Month: </label>
+
+<select id="monthFilter" onchange="loadTable()">
+  <option value="ALL">All Months</option>
+  <option value="January">January</option>
+  <option value="February">February</option>
+  <option value="March">March</option>
+  <option value="April">April</option>
+  <option value="May">May</option>
+  <option value="June">June</option>
+  <option value="July">July</option>
+  <option value="August">August</option>
+  <option value="September">September</option>
+  <option value="October">October</option>
+  <option value="November">November</option>
+  <option value="December">December</option>
+</select>
+
+<button onclick="exportToExcel()">⬇ Export Excel</button>
+
+<br><br>
+
+<table border="1" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Customer</th>
+      <th>CIF</th>
+      <th>Status</th>
+      <th>Service</th>
+      <th>Amount</th>
+      <th>Remark</th>
+      <th>Incentive</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody id="tableBody"></tbody>
+</table>
+
+<br>
+<a href="index.html">⬅ Back Dashboard</a>
+
+<script>
+let records = JSON.parse(localStorage.getItem("records")) || [];
+let tbody = document.getElementById("tableBody");
+
+
+function loadTable() {
+
+  tbody.innerHTML = "";
+
+  let selectedMonth =
+    document.getElementById("monthFilter").value;
+
+  let filteredRecords = records;
+
+  if (selectedMonth !== "ALL") {
+    filteredRecords = records.filter(r => {
+      let recordMonth =
+        new Date(r.date).toLocaleString("en-US", { month: "long" });
+      return recordMonth === selectedMonth;
+    });
+  }
+
+  filteredRecords.forEach((r, index) => {
+
+    let row = `
+      <tr>
+        <td>${r.date}</td>
+        <td>${r.customer}</td>
+        <td>${r.cif}</td>
+        <td>${r.status}</td>
+        <td>${r.service}</td>
+        <td>LKR ${r.amount.toLocaleString()}</td>
+        <td>${r.remark}</td>
+        <td>LKR ${r.incentive.toFixed(2)}</td>
+        <td><button onclick="deleteRecord(${index})">Delete</button></td>
+      </tr>
+    `;
+
+    tbody.innerHTML += row;
+  });
+}
+
+
+function deleteRecord(i) {
+  records.splice(i, 1);
+  localStorage.setItem("records", JSON.stringify(records));
+  loadTable();
+}
+
+
+function exportToExcel() {
+
+  let csv =
+    "Date,Customer,CIF,Status,Service,Amount,Remark,Incentive\n";
+
+  records.forEach(r => {
+    csv += `${r.date},${r.customer},${r.cif},${r.status},${r.service},${r.amount},${r.remark},${r.incentive}\n`;
+  });
+
+  let blob = new Blob([csv], { type: "text/csv" });
+  let link = document.createElement("a");
+
+  link.href = URL.createObjectURL(blob);
+  link.download = "monthly_report.csv";
+
+  link.click();
+}
+
+loadTable();
+</script>
+
+</body>
+</html>

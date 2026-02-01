@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Incentive System - Rasheed</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <h1>📊 Incentive Dashboard</h1>
+
+  <!-- Dashboard Summary Box -->
+  <div class="dashboard">
+
+    <h2>Total Incentive: <span id="totalIncentive">0</span> LKR</h2>
+
+    <h3>CIF Achieved: <span id="totalCIF">0</span> / 600</h3>
+
+    <h3>Term Investment Achieved: 
+      <span id="tiAchieved">0</span> / 60,000,000
+    </h3>
+
+    <h3>Facility Achieved: 
+      <span id="facilityAchieved">0</span> / 60,000,000
+    </h3>
+
+  </div>
+
+  <hr>
+
+  <!-- Monthly Summary Table -->
+  <h2>📅 Monthly Performance Summary</h2>
+
+  <table id="monthlyTable">
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Incentive</th>
+        <th>CIF</th>
+        <th>TI</th>
+        <th>Facility</th>
+      </tr>
+    </thead>
+
+    <tbody id="monthlyDashboard"></tbody>
+  </table>
+
+  <hr>
+
+  <!-- Add Record Form -->
+  <h2>➕ Add New Record</h2>
+
+  <form id="recordForm">
+
+    <input type="date" id="date" required>
+
+    <input type="text" id="customer" placeholder="Customer Name" required>
+
+    <input type="text" id="cif" placeholder="CIF Number" required>
+
+    <!-- NEW / EXISTING -->
+    <select id="status" required>
+      <option value="">Select New/Existing</option>
+      <option value="NEW">NEW</option>
+      <option value="EXISTING">EXISTING</option>
+    </select>
+
+    <!-- Service Type -->
+    <select id="service">
+      <option value="INITIAL DEPOSIT">Initial Deposit</option>
+      <option value="TERM INVESTMENT">Term Investment</option>
+      <option value="FACILITY">Facility</option>
+    </select>
+
+    <input type="number" id="amount" placeholder="Amount" required>
+
+    <!-- Remark Dropdown -->
+    <select id="remark">
+      <option value="">Select Remark</option>
+    </select>
+
+    <button type="submit">SAVE</button>
+
+  </form>
+
+  <br>
+
+  <a href="report.html">📄 View Monthly Report</a> |
+  <a href="incentives.html">⚙ Edit Incentive Scheme</a>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

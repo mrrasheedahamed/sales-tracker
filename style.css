@@ -1,0 +1,155 @@
+/* ===============================
+   GENERAL PAGE SETTINGS
+================================ */
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* ===============================
+   HEADER
+================================ */
+h1 {
+  background: black;
+  color: white;
+  padding: 15px;
+  margin: 0;
+  font-size: 22px;
+}
+
+/* ===============================
+   DASHBOARD BOX
+================================ */
+.dashboard {
+  background: white;
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.dashboard h2 {
+  font-size: 20px;
+}
+
+.dashboard h3 {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+/* ===============================
+   FORM DESIGN
+================================ */
+form {
+  background: white;
+  width: 80%;
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+input, select, button {
+  padding: 12px;
+  margin: 8px 0;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: black;
+  color: white;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+}
+
+button:hover {
+  background: green;
+}
+
+/* ===============================
+   TABLE RESPONSIVE
+================================ */
+table {
+  width: 90%;
+  max-width: 900px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: white;
+  overflow-x: auto;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid black;
+  font-size: 14px;
+}
+
+/* ===============================
+   LINKS
+================================ */
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  margin: 10px;
+}
+
+a:hover {
+  color: green;
+}
+
+/* ===============================
+   MOBILE RESPONSIVE MODE
+================================ */
+@media (max-width: 600px) {
+
+  h1 {
+    font-size: 18px;
+    padding: 12px;
+  }
+
+  .dashboard {
+    width: 92%;
+    padding: 15px;
+  }
+
+  .dashboard h2 {
+    font-size: 18px;
+  }
+
+  .dashboard h3 {
+    font-size: 14px;
+  }
+
+  form {
+    width: 92%;
+    padding: 15px;
+  }
+
+  input, select, button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th, td {
+    font-size: 13px;
+    padding: 8px;
+  }
+}

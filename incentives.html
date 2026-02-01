@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Incentive Scheme</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>⚙ Incentive Scheme Editor</h1>
+
+<table border="1" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Value (LKR)</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody id="schemeTable"></tbody>
+</table>
+
+<br>
+
+<h3>Add New Incentive Type</h3>
+
+<input type="text" id="newType" placeholder="Type Name">
+<input type="number" id="newValue" placeholder="Value">
+<button onclick="addType()">Add</button>
+
+<br><br>
+
+<a href="index.html">⬅ Back Dashboard</a>
+
+<script>
+let scheme =
+  JSON.parse(localStorage.getItem("incentiveScheme")) || {};
+
+
+function loadScheme() {
+
+  let tbody = document.getElementById("schemeTable");
+  tbody.innerHTML = "";
+
+  Object.keys(scheme).forEach(type => {
+
+    tbody.innerHTML += `
+      <tr>
+        <td>${type}</td>
+        <td>
+          <input type="number"
+            value="${scheme[type]}"
+            onchange="updateValue('${type}', this.value)">
+        </td>
+        <td>
+          <button onclick="deleteType('${type}')">Delete</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+
+function updateValue(type, value) {
+  scheme[type] = parseFloat(value);
+  localStorage.setItem("incentiveScheme", JSON.stringify(scheme));
+}
+
+
+function deleteType(type) {
+  delete scheme[type];
+  localStorage.setItem("incentiveScheme", JSON.stringify(scheme));
+  loadScheme();
+}
+
+
+function addType() {
+
+  let type =
+    document.getElementById("newType").value.trim();
+
+  let value =
+    parseFloat(document.getElementById("newValue").value);
+
+  if (!type || isNaN(value)) {
+    alert("Enter valid Type and Value!");
+    return;
+  }
+
+  scheme[type] = value;
+
+  localStorage.setItem("incentiveScheme", JSON.stringify(scheme));
+
+  document.getElementById("newType").value = "";
+  document.getElementById("newValue").value = "";
+
+  loadScheme();
+}
+
+loadScheme();
+</script>
+
+</body>
+</html>
